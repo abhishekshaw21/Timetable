@@ -68,22 +68,16 @@ class Teacher
 		}
 		return day;	
 	}
-	public int day_ratio(){
-		float min=-1;
-		int unassigned,assigned;
-		for(int i=0;i<6;i++)
+	public float day_ratio(int day)
+	{
+		int unassigned=0,assigned=0;
+		for(int j=0;j<7;j++)
 		{
-			unassigned=0;
-			assigned=0;
-			for(int j=0;j<7;j++)
-			{
-				if(timetable[i][j]==null||timetable[i][j]=="X")
-					unassigned++;
-				else
-					assigned++;
-			}
-			day[i]=unassigned/(assigned+unassigned);
-			if(day[])
+			if(timetable[day][j]==null||timetable[day][j]=="X")
+				unassigned++;
+			else
+				assigned++;
 		}
+		return ((float)unassigned/(assigned+unassigned));
 	}
 }
