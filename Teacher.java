@@ -18,13 +18,6 @@ class Teacher
 		for(int i=4;i<7;i++)
 			timetable[5][i].subjectID="X";
 	}
-	public evaluate_heuristic()
-	{
-		int first_period_weight=1000;
-		int non_teaching_weight=500;
-		int day_ratio_weight=100;
-		
-	}
 	public void notavailable(int day,int start_period,int end_period)
 	{
 			for(int i=start_period;i<=end_period;i++)
@@ -47,13 +40,7 @@ class Teacher
 			System.out.println();
 		}
 	}
-	public int heuristic_result()
-	{
-		int non_teaching=non_teaching_day();
-		int first_period;
-	}
-	private boolean non_teachingday(){
-		int day=0;
+	private boolean non_teachingday(int day){
 		for(int i=0;i<6;i++)
 		{
 			for(int j=0;j<7;j++)
@@ -86,5 +73,40 @@ class Teacher
 				assigned++;
 		}
 		return ((float)unassigned/(assigned+unassigned));
+	}
+	public int max_day_ratio()
+	{
+		float max=-1,x,day,free_day=-1;
+		for(int i=0;i<6;i++)
+		{
+			x=day_ratio(i);
+			if(x>max)
+			{
+				if(x==1 && free_day==-1)
+				{
+					free_day=i;
+				}
+				else
+				{	
+				     max=x;
+				     day=i;
+				}
+			}
+		}
+		if(max==0)
+			return free_day;
+		else
+			return day;
+	}
+	public evaluate_heuristic()
+	{
+		int first_period_weight=10*(this.first_period-3);
+		int non_teaching_weight=50*;
+		int day_ratio_weight=0,x;
+		for(int i=0;i<6;i++)
+		{
+			x=
+		}
+		first_period_weight=10;
 	}
 }
