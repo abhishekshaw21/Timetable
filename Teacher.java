@@ -88,7 +88,7 @@ class Teacher
 				}
 				else
 				{	
-				     max=x;
+				     max=x;_
 				     day=i;
 				}
 			}
@@ -101,12 +101,18 @@ class Teacher
 	public evaluate_heuristic()
 	{
 		int first_period_weight=10*(this.first_period-3);
-		int non_teaching_weight=50*;
+		int non_teaching_weight=0;
 		int day_ratio_weight=0,x;
 		for(int i=0;i<6;i++)
 		{
-			x=
+			x=day_ratio(i);
+			x=x*x;
+			day_ratio_weight+=x;
 		}
-		first_period_weight=10;
+		day_ratio_weight*=10;
+		for(int i=0;i<6;i++)
+			if(non_teaching_day(i))
+				non_teaching_day=50;
+		return first_period_weight+non_teaching_weight+day_ratio_weight
 	}
 }
