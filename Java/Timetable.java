@@ -270,15 +270,41 @@ class Timetable
 			System.out.println("Lab  "+(i+1)+"\n");
 			ltt[i].display();
 		}
+	    	//do
+		//{
+			assigned=0;
+			for(int i=0;i<no_of_teacher;i++)
+			{
+				if(ttt[i].subQ.size()==0)
+					assigned++;
+				else
+				{
+					sub=ttt[i].subQ.removeFirst();
+					int k=ttt[i].max_day_ratio();
+					int fs=ttt[i].first_period();
+					if(fs<4){
+						for(int j=0;j<7;j++)
+						{
+							if(ttt[i].timetable[k][j]==null&&stt[sub.year-1][sub.dept].timetable[k][j]==null)
+							{
+								ttt[i].timetable[k][j]=sub;
+								stt[sub.year][sub.dept].timetable[k][j]=sub;
+								break;
+							}
+						}
+						if(j==7)
+						{
+							ttt[i].subQ.add(sub);
+						}
+					}
+				}
+			}
+		//}while(assigned!=no_of_teacher;
 		/*for(int i=0;i<no_of_teacher;i++)
 		{
 				System.out.println("Teacher "+(i+1)+"\n");
 				ttt[i].display();
 				Thread.sleep(1000);
-		}*/	
-	    	for(int i=0;i<no_of_teacher;i++)
-		{
-				
-		}
+		}*/
 	}
 }
