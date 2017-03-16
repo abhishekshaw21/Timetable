@@ -45,29 +45,29 @@ class Teacher
 		{
 			for(int j=0;j<7;j++)
 			{
-					if(timetable[i][j]!=null && timetable[i][j]!="X")
+					if(timetable[i][j].subjectID!=null && timetable[i][j].subjectID!="X")
 						break;
+				if(j==7)
+					return false;
 			}
-			if(j==7)
-				return false;
 		}
 		return true;
 	}
-	private static int first_period(){
+	public  int first_period(){
 		int day=0;
 		for(int i=0;i<6;i++)
 		{
-			if(timetable[i][0]!=null && timetable[i][0]!="X")
+			if(timetable[i][0].subjectID!=null && timetable[i][0].subjectID!="X")
 				day++;
 		}
 		return day;	
 	}
-	static private float day_ratio(int day)
+	private float day_ratio(int day)
 	{
 		int unassigned=0,assigned=0;
 		for(int j=0;j<7;j++)
 		{
-			if(timetable[day][j]==null||timetable[day][j]=="X")
+			if(timetable[day][j].subjectID==null)
 				unassigned++;
 			else
 				assigned++;
@@ -76,7 +76,8 @@ class Teacher
 	}
 	public int max_day_ratio()
 	{
-		float max=-1,x,day,free_day=-1;
+		float max=-1,x;
+		int day=-1,free_day=-1;
 		for(int i=0;i<6;i++)
 		{
 			x=day_ratio(i);
@@ -88,7 +89,7 @@ class Teacher
 				}
 				else
 				{	
-				     max=x;_
+				     max=x;
 				     day=i;
 				}
 			}
@@ -98,7 +99,7 @@ class Teacher
 		else
 			return day;
 	}
-	public evaluate_heuristic()
+	/*public evaluate_heuristic()
 	{
 		int first_period_weight=10*(this.first_period-3);
 		int non_teaching_weight=0;
@@ -114,5 +115,5 @@ class Teacher
 			if(non_teaching_day(i))
 				non_teaching_day=50;
 		return first_period_weight+non_teaching_weight+day_ratio_weight
-	}
+	}*/
 }

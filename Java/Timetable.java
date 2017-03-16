@@ -257,6 +257,82 @@ class Timetable
 				}
 			}
 		}
+		for(int i=0;i<no_of_lab;i++)
+		{
+			System.out.println("Lab  "+(i+1)+"\n");
+			ltt[i].display();
+		}
+	    do
+		{
+			assigned=0;	
+			for(int i=0;i<no_of_teacher;i++)
+			{
+				if(ttt[i].subQ.size()==0)
+					continue;
+				else
+				{
+					sub=ttt[i].subQ.removeFirst();
+					int k=ttt[i].max_day_ratio();
+					int fs=ttt[i].first_period();
+					if(fs<4)
+					{
+						for(int j=0;j<7;j++)
+						{
+							if(ttt[i].timetable[k][j].subjectID==null&&stt[sub.year-1][sub.deptcode].timetable[k][j].subjectID==null)
+							{
+								ttt[i].timetable[k][j]=sub;
+								stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
+								break;
+							}
+							if(j==7)
+							{
+								ttt[i].subQ.add(sub);
+							}
+						}
+					}
+				}
+				if(ttt[i].subQ.size()<=2)
+				 	assigned++;
+				else
+				{
+					sub=ttt[i].subQ.removeFirst();
+					int k=ttt[i].max_day_ratio();
+					int j;
+						for( j=0;j<7;j++)
+						{
+							if(ttt[i].timetable[k][j].subjectID==null&&stt[sub.year-1][sub.deptcode].timetable[k][j].subjectID==null)
+							{
+								ttt[i].timetable[k][j]=sub;
+								stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
+								break;
+							}
+						}
+						if(j==6)
+						{
+							outerloop:for(k=0;i<6;i++)
+								for(j=0;j<7;j++)
+								{
+									if(ttt[i].timetable[k][j]==null&&stt[sub.year-1][sub.deptcode].timetable[k][j]==null)
+									{
+										ttt[i].timetable[k][j]=sub;
+										stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
+										break outerloop;
+									}
+								}
+								if(k==5)
+										ttt[i].subQ.add(sub);
+						}
+						
+				}	
+			}
+			System.out.println(assigned);
+		}while(assigned!=no_of_teacher);
+		for(int i=0;i<no_of_teacher;i++)
+		{
+				System.out.println("Teacher "+(i+1)+"\n");
+				ttt[i].display();
+				Thread.sleep(1000);
+		}
 		for(int i=0;i<no_of_year;i++)
 		{
 			for(int j=0;j<no_of_dept;j++)
@@ -265,46 +341,5 @@ class Timetable
 				stt[i][j].display();	
 			}
 		}
-		for(int i=0;i<no_of_lab;i++)
-		{
-			System.out.println("Lab  "+(i+1)+"\n");
-			ltt[i].display();
-		}
-	    	//do
-		//{
-			assigned=0;
-			for(int i=0;i<no_of_teacher;i++)
-			{
-				if(ttt[i].subQ.size()==0)
-					assigned++;
-				else
-				{
-					sub=ttt[i].subQ.removeFirst();
-					int k=ttt[i].max_day_ratio();
-					int fs=ttt[i].first_period();
-					if(fs<4){
-						for(int j=0;j<7;j++)
-						{
-							if(ttt[i].timetable[k][j]==null&&stt[sub.year-1][sub.dept].timetable[k][j]==null)
-							{
-								ttt[i].timetable[k][j]=sub;
-								stt[sub.year][sub.dept].timetable[k][j]=sub;
-								break;
-							}
-						}
-						if(j==7)
-						{
-							ttt[i].subQ.add(sub);
-						}
-					}
-				}
-			}
-		//}while(assigned!=no_of_teacher;
-		/*for(int i=0;i<no_of_teacher;i++)
-		{
-				System.out.println("Teacher "+(i+1)+"\n");
-				ttt[i].display();
-				Thread.sleep(1000);
-		}*/
 	}
 }
