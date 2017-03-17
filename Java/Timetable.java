@@ -90,10 +90,10 @@ class Timetable
 		{
 			ttt[i].teaching_hours=16;
 		}
-		/*for(int day=0;day<no_of_subjects;day++)
+		for(int day=0;day<no_of_subjects;day++)
 		{
 			System.out.println(s[day].subjectID+" "+s[day].dept+" "+s[day].year+" "+s[day].theortical+" "+s[day].tutorial+" "+s[day].practical);
-		}*/
+		}
 		int labref=0;
 		do
 		{
@@ -262,23 +262,21 @@ class Timetable
 			System.out.println("Lab  "+(i+1)+"\n");
 			ltt[i].display();
 		}
-		int totals=0;
-		long start_time = System.currentTimeMillis();
-		long wait_time = 3000;
-		long end_time = start_time + wait_time;
 	    do
 		{
-			int j=0;
+			assigned=0;	
 			for(int i=0;i<no_of_teacher;i++)
 			{
-				if(ttt[i].subQ.size()!=0)
+				if(ttt[i].subQ.size()==0)
+					continue;
+				else
 				{
 					sub=ttt[i].subQ.removeFirst();
 					int k=ttt[i].max_day_ratio();
 					int fs=ttt[i].first_period();
 					if(fs<4)
 					{
-						for(j=0;j<7;j++)
+						for(int j=0;j<7;j++)
 						{
 							if(ttt[i].timetable[k][j].subjectID==null&&stt[sub.year-1][sub.deptcode].timetable[k][j].subjectID==null)
 							{
@@ -286,51 +284,15 @@ class Timetable
 								stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
 								break;
 							}
-						}
-						if(j==7)
+							if(j==7)
+							{
 								ttt[i].subQ.add(sub);
-					}
-					else
-					{
-						for(j=1;j<7;j++)
-						{
-							if(ttt[i].timetable[k][j].subjectID==null&&stt[sub.year-1][sub.deptcode].timetable[k][j].subjectID==null)
-							{
-								ttt[i].timetable[k][j]=sub;
-								stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
-								break;
 							}
 						}
-						if(j==7)
-							ttt[i].subQ.add(sub);
 					}
 				}
-			}
-		}while(System.currentTimeMillis() < end_time);
-		/*t kx=0;
-		for(int i=0;i<no_of_teacher;i++)
-		{
-				System.out.println("Teacher "+(i+1)+"\n");
-				kx+=ttt[i].display();
-				//Thread.sleep(1000);
-		}
-		System.out.println(kx);
-		Thread.sleep(10000);*/
-		for(int i=0;i<no_of_year;i++)
-		{
-			for(int j=0;j<no_of_dept;j++)
-			{
-				System.out.println("Year:"+(i+1)+" Department:"+j+"\n");
-				stt[i][j].display();	
-			}
-			//Thread.sleep(1000);
-		}
-	}
-}
-		/*	for(int i=0;i<no_of_teacher;i++)
-			{
-				if(ttt[i].subQ.size()==0)
-					assigned++;
+				if(ttt[i].subQ.size()<=2)
+				 	assigned++;
 				else
 				{
 					sub=ttt[i].subQ.removeFirst();
@@ -345,9 +307,9 @@ class Timetable
 								break;
 							}
 						}
-						if(j==7)
+						if(j==6)
 						{
-							outerloop:for(k=0;k<6;k++)
+							outerloop:for(k=0;i<6;i++)
 								for(j=0;j<7;j++)
 								{
 									if(ttt[i].timetable[k][j]==null&&stt[sub.year-1][sub.deptcode].timetable[k][j]==null)
@@ -357,8 +319,27 @@ class Timetable
 										break outerloop;
 									}
 								}
-								if(k==6)
+								if(k==5)
 										ttt[i].subQ.add(sub);
-						}		
+						}
+						
 				}	
-			}*/
+			}
+			System.out.println(assigned);
+		}while(assigned!=no_of_teacher);
+		for(int i=0;i<no_of_teacher;i++)
+		{
+				System.out.println("Teacher "+(i+1)+"\n");
+				ttt[i].display();
+				Thread.sleep(1000);
+		}
+		for(int i=0;i<no_of_year;i++)
+		{
+			for(int j=0;j<no_of_dept;j++)
+			{
+				System.out.println("Year:"+(i+1)+" Department:"+j+"\n");
+				stt[i][j].display();	
+			}
+		}
+	}
+}

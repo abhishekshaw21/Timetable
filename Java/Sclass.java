@@ -18,21 +18,11 @@ class Sclass
 	}
 	public void display()
 	{
-		int count=0;
 		for(int i=0;i<6;i++){
 			for(int j=0;j<7;j++){
-				if(timetable[i][j].subjectID==null)
-				{
-					System.out.print("  -   ");
-				}
-				else if(timetable[i][j].subjectID!="X")
-				{
-					System.out.print(timetable[i][j].subjectID+" ");
-					count++;
-				}
+				System.out.print(timetable[i][j].subjectID+" ");
 			}
 			System.out.println();
 		}
-		System.out.println("No. of subjects:"+count);
 	}
 }
