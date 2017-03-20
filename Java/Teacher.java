@@ -27,18 +27,35 @@ class Teacher
 	}
 	public void displayQ()
 	{
+		int x;
 		for(Subject s:subQ){
-				System.out.println("subjectID:  "+s.subjectID);
+				x=(int)(s.subjectID.charAt(4))-48;
+				if(x>5)
+				{
+					subQ.remove(subQ);
+				}
+				//System.out.println("subjectID:  "+s.subjectID);
 			}
 	}
-	public void display()
+	public int display()
 	{
+		int count=0;
 		for(int i=0;i<6;i++){
 			for(int j=0;j<7;j++){
-				System.out.print(timetable[i][j].subjectID+" ");
+				if(timetable[i][j].subjectID==null)
+				{
+					System.out.print("  -   ");
+				}
+				else if(timetable[i][j].subjectID!="X")
+				{
+					System.out.print(timetable[i][j].subjectID+" ");
+					count++;
+				}
 			}
 			System.out.println();
 		}
+		System.out.println("No. of subjects:"+count);
+		return count;
 	}
 	private boolean non_teachingday(int day){
 		for(int i=0;i<6;i++)
@@ -77,7 +94,7 @@ class Teacher
 	public int max_day_ratio()
 	{
 		float max=-1,x;
-		int day=-1,free_day=-1;
+		int day=6,free_day=-1;
 		for(int i=0;i<6;i++)
 		{
 			x=day_ratio(i);
