@@ -33,6 +33,6 @@ class Sclass
 			}
 			System.out.println();
 		}
-		System.out.println("No. of subjects:"+count);
+		//System.out.println("No. of subjects:"+count);
 	}
 }
