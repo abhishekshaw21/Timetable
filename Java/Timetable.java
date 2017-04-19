@@ -189,50 +189,7 @@ class Timetable
 							}
 						}
 					int s1=0,s2=1,s3=4,selected=0; //empty slots are 1-3,2-4,5-7
-					for(j=0;j<6;j++)
-					{
-						if(Timetable.labchecker(ltt[i],labteacher[0],labteacher[1],labteacher[2],stt[sub.year-1][sub.deptcode],s1,j)==true)
-						{
-							ltt[i].timetable[j][s1]=sub;
-							ltt[i].timetable[j][s1+1]=sub;
-							ltt[i].timetable[j][s1+2]=sub;
-							labteacher[0].timetable[j][s1]=sub;
-							labteacher[0].timetable[j][s1+1]=sub;
-							labteacher[0].timetable[j][s1+2]=sub;
-							labteacher[1].timetable[j][s1]=sub;
-							labteacher[1].timetable[j][s1+1]=sub;
-							labteacher[1].timetable[j][s1+2]=sub;
-							labteacher[2].timetable[j][s1]=sub;
-							labteacher[2].timetable[j][s1+1]=sub;
-							labteacher[2].timetable[j][s1+2]=sub;
-							stt[sub.year-1][sub.deptcode].timetable[j][s1]=sub;
-							stt[sub.year-1][sub.deptcode].timetable[j][s1+1]=sub;
-							stt[sub.year-1][sub.deptcode].timetable[j][s1+2]=sub;
-							selected=1;
-							break;
-						}
-						else if(Timetable.labchecker(ltt[i],labteacher[0],labteacher[1],labteacher[2],stt[sub.year-1][sub.deptcode],s2,j)==true)
-						{
-							ltt[i].timetable[j][s2]=sub;
-							ltt[i].timetable[j][s2+1]=sub;
-							ltt[i].timetable[j][s2+2]=sub;
-							labteacher[0].timetable[j][s2]=sub;
-							labteacher[0].timetable[j][s2+1]=sub;
-							labteacher[0].timetable[j][s2+2]=sub;
-							labteacher[1].timetable[j][s2]=sub;
-							labteacher[1].timetable[j][s2+1]=sub;
-							labteacher[1].timetable[j][s2+2]=sub;
-							labteacher[2].timetable[j][s2]=sub;
-							labteacher[2].timetable[j][s2+1]=sub;
-							labteacher[2].timetable[j][s2+2]=sub;
-							stt[sub.year-1][sub.deptcode].timetable[j][s2]=sub;
-							stt[sub.year-1][sub.deptcode].timetable[j][s2+1]=sub;
-							stt[sub.year-1][sub.deptcode].timetable[j][s2+2]=sub;
-							selected=1;
-							break;
-						}
-					}
-					for(j=0;j<6 && selected==0;j++)//this looping style checks for the availability of lab classes in the first half and then in second half
+					for(j=0;j<6 ;j++)//this looping style checks for the availability of lab classes in the second half and then in first half
 					{
 						if(Timetable.labchecker(ltt[i],labteacher[0],labteacher[1],labteacher[2],stt[sub.year-1][sub.deptcode],s3,j)==true)
 						{
@@ -251,6 +208,50 @@ class Timetable
 							stt[sub.year-1][sub.deptcode].timetable[j][s3]=sub;
 							stt[sub.year-1][sub.deptcode].timetable[j][s3+1]=sub;
 							stt[sub.year-1][sub.deptcode].timetable[j][s3+2]=sub;
+							selected=1;
+							break;
+						}
+					}
+					for(j=0;j<6 && selected==0;j++)
+					{
+						if(Timetable.labchecker(ltt[i],labteacher[0],labteacher[1],labteacher[2],stt[sub.year-1][sub.deptcode],s2,j)==true)
+						{
+							ltt[i].timetable[j][s2]=sub;
+							ltt[i].timetable[j][s2+1]=sub;
+							ltt[i].timetable[j][s2+2]=sub;
+							labteacher[0].timetable[j][s2]=sub;
+							labteacher[0].timetable[j][s2+1]=sub;
+							labteacher[0].timetable[j][s2+2]=sub;
+							labteacher[1].timetable[j][s2]=sub;
+							labteacher[1].timetable[j][s2+1]=sub;
+							labteacher[1].timetable[j][s2+2]=sub;
+							labteacher[2].timetable[j][s2]=sub;
+							labteacher[2].timetable[j][s2+1]=sub;
+							labteacher[2].timetable[j][s2+2]=sub;
+							stt[sub.year-1][sub.deptcode].timetable[j][s2]=sub;
+							stt[sub.year-1][sub.deptcode].timetable[j][s2+1]=sub;
+							stt[sub.year-1][sub.deptcode].timetable[j][s2+2]=sub;
+							//selected=1;
+							break;
+						}
+						else if(Timetable.labchecker(ltt[i],labteacher[0],labteacher[1],labteacher[2],stt[sub.year-1][sub.deptcode],s1,j)==true)
+						{
+							ltt[i].timetable[j][s1]=sub;
+							ltt[i].timetable[j][s1+1]=sub;
+							ltt[i].timetable[j][s1+2]=sub;
+							labteacher[0].timetable[j][s1]=sub;
+							labteacher[0].timetable[j][s1+1]=sub;
+							labteacher[0].timetable[j][s1+2]=sub;
+							labteacher[1].timetable[j][s1]=sub;
+							labteacher[1].timetable[j][s1+1]=sub;
+							labteacher[1].timetable[j][s1+2]=sub;
+							labteacher[2].timetable[j][s1]=sub;
+							labteacher[2].timetable[j][s1+1]=sub;
+							labteacher[2].timetable[j][s1+2]=sub;
+							stt[sub.year-1][sub.deptcode].timetable[j][s1]=sub;
+							stt[sub.year-1][sub.deptcode].timetable[j][s1+1]=sub;
+							stt[sub.year-1][sub.deptcode].timetable[j][s1+2]=sub;
+							//selected=1;
 							break;
 						}
 					}
@@ -284,30 +285,30 @@ class Timetable
 					int fs=ttt[i].first_period();
 					if(fs<4)
 					{
-						for(j=0;j<7;j++)
+						for(j=3;j>=0;j--)
 						{
 							if(ttt[i].timetable[k][j].subjectID==null&&stt[sub.year-1][sub.deptcode].timetable[k][j].subjectID==null)
 							{
-								ttt[i].timetable[k][j]=sub;
-								stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
-								break;
+									ttt[i].timetable[k][j]=sub;
+									stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
+									break;
 							}
 						}
-						if(j==7)
+						if(j==-1)
 								ttt[i].subQ.add(sub);
 					}
 					else
 					{
-						for(j=1;j<7;j++)
+						for(j=3;j>=1;j--)
 						{
 							if(ttt[i].timetable[k][j].subjectID==null&&stt[sub.year-1][sub.deptcode].timetable[k][j].subjectID==null)
 							{
-								ttt[i].timetable[k][j]=sub;
-								stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
-								break;
+									ttt[i].timetable[k][j]=sub;
+									stt[sub.year-1][sub.deptcode].timetable[k][j]=sub;
+									break;
 							}
 						}
-						if(j==7)
+						if(j==0)
 							ttt[i].subQ.add(sub);
 					}
 				}
@@ -339,12 +340,14 @@ class Timetable
 				}	
 			}
 		}while(no_of_teacher!=assigned);
+		//
+		System.out.println(assigned);
 		int kx=0;
 		for(int i=0;i<no_of_teacher;i++)
 		{
 				System.out.println("Teacher "+(i+1)+"\n");
 				ttt[i].display();
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 		}
 		System.out.println(kx);
 		for(int i=0;i<no_of_year;i++)
